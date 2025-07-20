@@ -1,0 +1,95 @@
+<div class="container mt-5">
+  <h2
+    class="text-center mb-4 display-6 text-primary fw-bold border-bottom pb-2"
+  >
+    Department Directory
+  </h2>
+
+  <div class="accordion" id="accordionDepartments">
+    <div
+      class="accordion-item border border-2 shadow-sm"
+      *ngFor="let dept of departments; let i = index"
+    >
+      <h2 class="accordion-header" [attr.id]="'heading' + i">
+        <button
+          class="accordion-button py-3 fw-semibold"
+          [ngClass]="{ collapsed: selectedDepartment?.id !== dept.id }"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapse' + i"
+          [attr.aria-expanded]="selectedDepartment?.id === dept.id"
+          [attr.aria-controls]="'collapse' + i"
+          (click)="onSelectDepartment(dept)"
+        >
+          <span class="fs-5 text-dark">
+            {{ dept.name }}
+          </span>
+          <!-- <span class="ms-auto badge bg-secondary fs-6">
+            {{ dept.location }}
+          </span> -->
+        </button>
+      </h2>
+
+      <div
+        [attr.id]="'collapse' + i"
+        class="accordion-collapse collapse"
+        [class.show]="selectedDepartment?.id === dept.id"
+        [attr.aria-labelledby]="'heading' + i"
+        data-bs-parent="#accordionDepartments"
+      >
+        <div class="accordion-body bg-light">
+          <div
+            *ngIf="
+              selectedDepartment?.id === dept.id && selectedEmployees.length > 0
+            "
+          >
+            <div class="table-responsive">
+              <table
+                class="table table-sm table-striped table-hover align-middle text-center"
+              >
+                <thead class="table-primary">
+                  <tr>
+                    <th scope="col" class="text-start ps-4">Employee Name</th>
+
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emp of selectedEmployees">
+                    <td class="text-start ps-4">
+                      <a
+                        [routerLink]="['/employee-details', emp.id]"
+                        class="text-decoration-none text-dark fw-semibold"
+                      >
+                        {{ emp.name }}
+                      </a>
+                    </td>
+
+                    <td>
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="deleteEmployee(emp.id)"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div
+            *ngIf="
+              selectedDepartment?.id === dept.id &&
+              selectedEmployees.length === 0
+            "
+            class="text-muted ps-3"
+          >
+            No employees in this department.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

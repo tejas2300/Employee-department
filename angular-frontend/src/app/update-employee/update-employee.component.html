@@ -1,0 +1,124 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white text-center">
+          <h4 class="mb-0">Update Employee</h4>
+        </div>
+        <div class="card-body bg-light">
+          <form (ngSubmit)="onSubmit()" #updateForm="ngForm" novalidate>
+            <!-- Employee ID (disabled) -->
+            <div class="mb-3">
+              <label for="id" class="form-label">Employee ID</label>
+              <input
+                type="text"
+                id="id"
+                class="form-control"
+                name="id"
+                [(ngModel)]="employee.id"
+                disabled
+              />
+            </div>
+
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                [(ngModel)]="employee.name"
+                required
+                minlength="2"
+              />
+              <div
+                *ngIf="
+                  updateForm.submitted && updateForm.controls.name?.invalid
+                "
+                class="text-danger"
+              >
+                Name is required (min 2 characters).
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="emailId" class="form-label">Email Address</label>
+              <input
+                type="email"
+                id="emailId"
+                class="form-control"
+                name="emailId"
+                [(ngModel)]="employee.emailId"
+                required
+              />
+              <div
+                *ngIf="
+                  updateForm.submitted && updateForm.controls.emailId?.invalid
+                "
+                class="text-danger"
+              >
+                Valid email is required.
+              </div>
+            </div>
+
+            <!-- Position -->
+            <div class="mb-3">
+              <label for="position" class="form-label">Position</label>
+              <input
+                type="text"
+                id="position"
+                class="form-control"
+                name="position"
+                [(ngModel)]="employee.position"
+                required
+              />
+              <div
+                *ngIf="
+                  updateForm.submitted && updateForm.controls.position?.invalid
+                "
+                class="text-danger"
+              >
+                Position is required.
+              </div>
+            </div>
+
+            <!-- Salary -->
+            <div class="mb-3">
+              <label for="salary" class="form-label">Salary</label>
+              <input
+                type="number"
+                id="salary"
+                class="form-control"
+                name="salary"
+                [(ngModel)]="employee.salary"
+                required
+                min="1000"
+              />
+              <div
+                *ngIf="
+                  updateForm.submitted && updateForm.controls.salary?.invalid
+                "
+                class="text-danger"
+              >
+                Salary must be at least 1000.
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-success btn-sm"
+                [disabled]="!updateForm.valid"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

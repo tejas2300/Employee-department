@@ -1,0 +1,155 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div
+        class="card shadow-sm border-0 rounded-4"
+        style="background-color: #f4f6f8"
+      >
+        <div
+          class="card-header bg-primary text-white text-center py-2 rounded-top-4"
+        >
+          <h5 class="mb-0 fw-semibold">Create New Employee</h5>
+        </div>
+        <div class="card-body px-4 py-3">
+          <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)" novalidate>
+            <!-- Employee ID -->
+            <div class="mb-2">
+              <label for="id" class="form-label">Employee ID</label>
+              <input
+                type="text"
+                id="id"
+                class="form-control form-control-sm"
+                [(ngModel)]="employee.id"
+                name="id"
+                required
+                #idRef="ngModel"
+              />
+              <div
+                *ngIf="formSubmitted && idRef.invalid"
+                class="text-danger small"
+              >
+                Employee ID is required.
+              </div>
+            </div>
+
+            <!-- Name -->
+            <div class="mb-2">
+              <label for="name" class="form-label">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control form-control-sm"
+                [(ngModel)]="employee.name"
+                name="name"
+                required
+                minlength="2"
+                #nameRef="ngModel"
+              />
+              <div
+                *ngIf="formSubmitted && nameRef.invalid"
+                class="text-danger small"
+              >
+                Name is required (min 2 characters).
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-2">
+              <label for="emailId" class="form-label">Email ID</label>
+              <input
+                type="email"
+                id="emailId"
+                class="form-control form-control-sm"
+                [(ngModel)]="employee.emailId"
+                name="emailId"
+                required
+                #emailRef="ngModel"
+              />
+              <div
+                *ngIf="formSubmitted && emailRef.invalid"
+                class="text-danger small"
+              >
+                Valid email is required.
+              </div>
+            </div>
+
+            <!-- Position -->
+            <div class="mb-2">
+              <label for="position" class="form-label">Position</label>
+              <input
+                type="text"
+                id="position"
+                class="form-control form-control-sm"
+                [(ngModel)]="employee.position"
+                name="position"
+                required
+                #positionRef="ngModel"
+              />
+              <div
+                *ngIf="formSubmitted && positionRef.invalid"
+                class="text-danger small"
+              >
+                Position is required.
+              </div>
+            </div>
+
+            <!-- Salary -->
+            <div class="mb-2">
+              <label for="salary" class="form-label">Salary (₹)</label>
+              <input
+                type="number"
+                id="salary"
+                class="form-control form-control-sm"
+                [(ngModel)]="employee.salary"
+                name="salary"
+                required
+                min="1000"
+                #salaryRef="ngModel"
+              />
+              <div
+                *ngIf="formSubmitted && salaryRef.invalid"
+                class="text-danger small"
+              >
+                Salary must be at least ₹1000.
+              </div>
+            </div>
+
+            <!-- Department -->
+            <div class="mb-3">
+              <label for="departmentId" class="form-label">Department</label>
+              <select
+                id="departmentId"
+                class="form-select form-select-sm"
+                [(ngModel)]="employee.departmentId"
+                name="departmentId"
+                required
+                #deptRef="ngModel"
+              >
+                <option value="" disabled selected>Select Department</option>
+                <option *ngFor="let dept of departments" [value]="dept.id">
+                  {{ dept.name }} ({{ dept.location }})
+                </option>
+              </select>
+              <div
+                *ngIf="formSubmitted && deptRef.invalid"
+                class="text-danger small"
+              >
+                Department selection is required.
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button
+                class="btn btn-primary btn-sm px-4 rounded-pill"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

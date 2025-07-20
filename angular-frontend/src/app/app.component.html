@@ -1,0 +1,68 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark px-4 shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-info" href="#">Employee Portal</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Navigation Links -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a
+            routerLink="/home"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link text-light"
+          >
+            Departments
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/employees"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link text-light"
+          >
+            Employees
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/create-employee"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link text-light"
+          >
+            Add Employee
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Section -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <span class="navbar-text text-white me-3">
+            Welcome, <strong class="text-info">Tejas</strong>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
